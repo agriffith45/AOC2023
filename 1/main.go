@@ -29,14 +29,8 @@ func main() {
 	//get a unique list of all values in the left list
 	valueMap := makeMapToTrackSimilarityScore(evens)
 	similarityScoreMap := findOutandRecordSimilarityScore(valueMap, odds)
-	answerPart2 := 0
-	for key := range similarityScoreMap {
-		//		fmt.Println("key ", key, " hits ", similarityScoreMap[key])
-		if similarityScoreMap[key] != 0 {
-			tempAnswer := key * similarityScoreMap[key]
-			answerPart2 = answerPart2 + tempAnswer
-		}
-	}
+	answerPart2 := calcSimilarityScore(similarityScoreMap)
+
 	fmt.Println("Answer to Part 2 is ", answerPart2)
 
 }
@@ -53,6 +47,18 @@ func splitIntoOddsAndEvens(arg1 []string) (evens []int, odds []int) {
 		}
 	}
 	return evens, odds
+}
+
+func calcSimilarityScore(similarityScoreMap map[int]int) int {
+	answerPart2 := 0
+	for key := range similarityScoreMap {
+		//		fmt.Println("key ", key, " hits ", similarityScoreMap[key])
+		if similarityScoreMap[key] != 0 {
+			tempAnswer := key * similarityScoreMap[key]
+			answerPart2 = answerPart2 + tempAnswer
+		}
+	}
+	return answerPart2
 }
 
 func findOutandRecordSimilarityScore(similarityScoreMap map[int]int, odds []int) map[int]int {
